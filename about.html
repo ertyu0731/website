@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Kmy Er Sze Lei</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- same header/nav on every page -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Kmy</a>
+      <ul>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page‑header">
+      <h1>About Me</h1>
+    </section>
+
+    <section class="content">
+      <p>
+        Hi! I’m Kmy Er Sze Lei, a 15‑year‑old student at the School of Science
+        and Technology, Singapore. My twin passions are <strong>leadership</strong> and
+        <strong>computer science</strong>. From running coding workshops for younger
+        kids to building SwiftUI apps (Calorize, Xuemi, Spotify Unwrapped),
+        I love turning ideas into tools that empower people.
+      </p>
+
+      <p>
+        Beyond the screen, I’ve had the privilege of representing my school
+        overseas—<em>#Project Serve</em> in Vietnam and two Hack Club events in
+        San Francisco—broadening my perspective on how tech can drive
+        community impact.
+      </p>
+    </section>
+  </main>
+
+  <footer>&copy; <span id="year"></span> Kmy Er Sze Lei</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
