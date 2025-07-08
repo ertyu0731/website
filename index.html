@@ -3,34 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kmy Er Sze Lei</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Kmy Er Sze Lei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2563eb;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --card: #ffffff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    /* ----- NAVBAR ----- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+    nav {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    /* ----- SECTIONS ----- */
+    section {
+      padding: 4rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .hero {
+      text-align: center;
+      background: #e0f2fe;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.3rem;
+    }
+    .typed-cursor {
+      color: var(--blue);
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .section-title {
+      font-size: 2rem;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* ----- CARDS ----- */
+    .card-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+    }
+    .card .date {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .card p {
+      font-size: 0.96rem;
+    }
+    @media (min-width: 650px) {
+      .card-grid.two-cols { grid-template-columns: repeat(2, 1fr); }
+      .card-grid.three-cols { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--dark);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+  <!-- ===== NAVBAR ===== -->
   <header>
     <nav>
-      <a href="index.html" class="logo">Kmy</a>
+      <a href="#hero" class="logo">Kmy</a>
       <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="leadership.html">Leadership</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Kmy Er Sze Lei</h1>
-      <p>Student Leader · Computer Science Enthusiast · Builder</p>
-    </section>
-  </main>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <h1>Kmy Er Sze Lei</h1>
+    <p>Student Leader · <span class="typed"></span></p>
+  </section>
 
-  <footer>
-    &copy; <span id="year"></span> Kmy Er Sze Lei
-  </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <p>
+      I’m a 15‑year‑old student passionate about weaving <strong>leadership</strong>
+      and <strong>computer science</strong> together. My creations include iOS
+      apps such as <em>Calorize</em>, <em>Xuemi</em>, and <em>Spotify Unwrapped</em>.
+      I’ve also represented my school in Vietnam (#Project Serve) and San Francisco (Hack Club), broadening my perspective on tech‑for‑good.
+    </p>
+  </section>
+
+  <!-- ===== LEADERSHIP ===== -->
+  <section id="leadership">
+    <h2 class="section-title">Leadership Experience</h2>
+    <div class="card-grid two-cols">
+      <div class="card">
+        <h3>Digital Citizenship Council Chair Candidate</h3>
+        <span class="date">2025</span>
+        <p>Championed the EAR initiative (Empower · Awareness · Respect) to foster a safer, kinder digital culture.</p>
+      </div>
+      <div class="card">
+        <h3>Exco Member, Kids Learn Code (KLC)</h3>
+        <span class="date">2023</span>
+        <p>Taught Python & block‑coding to 120+ primary school students while mentoring new volunteers.</p>
+      </div>
+      <div class="card">
+        <h3>Student Leader Summit Co‑organiser</h3>
+        <span class="date">2025</span>
+        <p>Gathered leaders from 10 schools to co‑design action plans on digital citizenship.</p>
+      </div>
+      <div class="card">
+        <h3>Opportunity X Scholar</h3>
+        <span class="date">2024</span>
+        <p>Analysed community‑health data and presented findings to 200+ peers globally.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="card-grid three-cols">
+      <div class="card">
+        <h3>Calorize</h3>
+        <span class="date">SwiftUI · 2024</span>
+        <p>Nutrition‑aware calorie tracker with ML food recognition.</p>
+      </div>
+      <div class="card">
+        <h3>Xuemi (学米)</h3>
+        <span class="date">SwiftUI · 2024</span>
+        <p>Mandarin vocab companion, 2<sup>nd</sup> runner‑up SST App Challenge.</p>
+      </div>
+      <div class="card">
+        <h3>Spotify Unwrapped</h3>
+        <span class="date">Python · 2025</span>
+        <p>CLI tool that turns your Spotify data into shareable year‑in‑music stories.</p>
+      </div>
+      <div class="card">
+        <h3>Pygame Cultural Platformer</h3>
+        <span class="date">Python · 2025</span>
+        <p>Bilingual game featuring Chinese & Malay mini‑games.</p>
+      </div>
+      <div class="card">
+        <h3>Snap & Seek Scavenger Hunt</h3>
+        <span class="date">Leadership · 2023</span>
+        <p>Campus‑wide photo hunt that fostered community bonding.</p>
+      </div>
+      <div class="card">
+        <h3>CyberSecure Teens (coming soon)</h3>
+        <span class="date">Non‑profit · 2026</span>
+        <p>App & resource hub to raise cybersecurity awareness among teens.</p>
+      </div>
+    </
