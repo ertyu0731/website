@@ -1,235 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="{ dark:false }" x-bind:class="dark ? 'dark' : ''" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kmy Er Sze Lei</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kmy Er Sze Lei | Portfolio</title>
+
+  <!-- Tailwind CDN and config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { accent: '#2563eb' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
   <style>
-    :root {
-      --blue: #2563eb;
-      --dark: #1f2937;
-      --light: #f9fafb;
-      --card: #ffffff;
+    /* Timeline styles */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 3px solid #2563eb;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", Arial, sans-serif;
-      scroll-behavior: smooth;
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
     }
-    body {
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-    /* ----- NAVBAR ----- */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    }
-    nav {
-      max-width: 1000px;
-      margin: auto;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: var(--blue);
-      text-decoration: none;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: var(--blue);
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -11px;
+      top: 0.3rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #2563eb;
+      border: 3px solid white;
+      box-sizing: content-box;
     }
 
-    /* ----- SECTIONS ----- */
-    section {
-      padding: 4rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .hero {
-      text-align: center;
-      background: #e0f2fe;
-    }
-    .hero h1 {
-      font-size: 2.6rem;
-      color: var(--blue);
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.3rem;
-    }
-    .typed-cursor {
-      color: var(--blue);
-      animation: blink 0.7s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .section-title {
-      font-size: 2rem;
-      color: var(--blue);
-      margin-bottom: 1.5rem;
-      text-align: center;
+    /* Typed text styling */
+    .typed-hero {
       font-weight: 600;
+      font-size: 1.75rem;
+      color: #2563eb;
+      min-height: 2.5rem;
     }
 
-    /* ----- CARDS ----- */
-    .card-grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-    .card {
-      background: var(--card);
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card h3 {
-      margin-bottom: 0.3rem;
-      font-size: 1.2rem;
-    }
-    .card .date {
-      font-size: 0.85rem;
-      color: #64748b;
-      margin-bottom: 0.6rem;
+    /* Contact form labels and inputs */
+    label {
       display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #1e293b; /* slate-800 */
     }
-    .card p {
-      font-size: 0.96rem;
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #cbd5e1; /* slate-300 */
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      resize: vertical;
     }
-    @media (min-width: 650px) {
-      .card-grid.two-cols { grid-template-columns: repeat(2, 1fr); }
-      .card-grid.three-cols { grid-template-columns: repeat(3, 1fr); }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgb(37 99 235 / 0.3);
+    }
+    /* Dark mode tweaks */
+    .dark label {
+      color: #cbd5e1; /* lighter text */
+    }
+    .dark input, .dark textarea {
+      background: #334155; /* slate-700 */
+      border-color: #64748b; /* slate-500 */
+      color: #f1f5f9; /* slate-100 */
+    }
+    .dark input:focus, .dark textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgb(37 99 235 / 0.5);
     }
 
-    /* ----- FOOTER ----- */
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: var(--dark);
-      color: #fff;
-      font-size: 0.9rem;
+    /* Achievement hover animation */
+    .achievement-animate li {
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .achievement-animate li:hover {
+      background-color: rgba(37, 99, 235, 0.1);
+      transform: scale(1.02);
+      padding-left: 0.5rem;
+      border-left: 4px solid #2563eb;
+    }
+
+    /* Game card hover effect */
+    .game-card:hover {
+      background-color: rgba(37, 99, 235, 0.1);
+      transform: scale(1.02);
+      transition: all 0.3s ease;
     }
   </style>
 </head>
-<body>
-  <!-- ===== NAVBAR ===== -->
-  <header>
-    <nav>
-      <a href="#hero" class="logo">Kmy</a>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#leadership">Leadership</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+<body class="bg-sky-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors">
+
+  <!-- NAVBAR -->
+  <header
+    class="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/90 backdrop-blur shadow flex items-center justify-between px-6 py-3"
+  >
+    <h1 class="font-bold text-xl text-accent cursor-default">Kmy</h1>
+    <nav class="hidden md:flex gap-6 font-medium">
+      <a href="#about" class="hover:text-accent">About</a>
+      <a href="#experiences" class="hover:text-accent">Experiences</a>
+      <a href="#achievements" class="hover:text-accent">Achievements</a>
+      <a href="#projects" class="hover:text-accent">Projects</a>
+      <a href="#games" class="hover:text-accent">Games</a>
+      <a href="#contact" class="hover:text-accent">Contact</a>
     </nav>
+    <button
+      @click="dark = !dark"
+      class="text-xl"
+      title="Toggle Dark Mode"
+      aria-label="Toggle Dark Mode"
+    >
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <h1>Kmy Er Sze Lei</h1>
-    <p>Student Leader · <span class="typed"></span></p>
-  </section>
-
-  <!-- ===== ABOUT ===== -->
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <p>
-      I’m a 15‑year‑old student passionate about weaving <strong>leadership</strong>
-      and <strong>computer science</strong> together. My creations include iOS
-      apps such as <em>Calorize</em>, <em>Xuemi</em>, and <em>Spotify Unwrapped</em>.
-      I’ve also represented my school in Vietnam (#Project Serve) and San Francisco (Hack Club), broadening my perspective on tech‑for‑good.
+  <!-- ABOUT -->
+  <section
+    id="about"
+    class="min-h-screen flex flex-col justify-center items-center text-center gap-6 px-6"
+  >
+    <h2 class="text-5xl md:text-6xl font-extrabold leading-tight">
+      <span class="block">Hey, I’m</span>
+      <span class="text-accent">Kmy Er Sze Lei</span>
+    </h2>
+    <div class="typed-hero" id="typed"></div>
+    <p class="max-w-3xl text-slate-700 dark:text-slate-300 text-lg md:text-xl leading-relaxed">
+      I’m a student leader who lives and breathes code. From building award‑winning apps to championing digital citizenship, I weave <strong>computer science</strong> and <strong>cyber‑security</strong> into every leadership challenge I tackle. Dive in to see how.
     </p>
+    <div class="flex gap-8 text-3xl mt-4">
+      <a href="https://instagram.com/kmyerszelei" target="_blank" aria-label="Instagram" class="hover:text-accent"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/yourGitHub" target="_blank" aria-label="GitHub" class="hover:text-accent"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/yourLink" target="_blank" aria-label="LinkedIn" class="hover:text-accent"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div
+      class="w-44 h-44 md:w-52 md:h-52 mt-8 rounded-full border-4 border-dashed border-accent flex items-center justify-center text-accent select-none"
+    >
+      Profile Photo
+    </div>
   </section>
 
-  <!-- ===== LEADERSHIP ===== -->
-  <section id="leadership">
-    <h2 class="section-title">Leadership Experience</h2>
-    <div class="card-grid two-cols">
-      <div class="card">
-        <h3>Digital Citizenship Council Chair Candidate</h3>
-        <span class="date">2025</span>
-        <p>Championed the EAR initiative (Empower · Awareness · Respect) to foster a safer, kinder digital culture.</p>
+  <!-- EXPERIENCES (Timeline) -->
+  <section id="experiences" class="py-20 max-w-5xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-12 text-center text-accent">Experiences</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <time class="font-semibold text-accent">2023 · Ho Chi Minh, Vietnam</time>
+        <p>
+          Immersed in Vietnamese culture and visited local tech companies and universities, learning how innovation flourishes in emerging markets.
+        </p>
       </div>
-      <div class="card">
-        <h3>Exco Member, Kids Learn Code (KLC)</h3>
-        <span class="date">2023</span>
-        <p>Taught Python & block‑coding to 120+ primary school students while mentoring new volunteers.</p>
+      <div class="timeline-item">
+        <time class="font-semibold text-accent">2024 · San Francisco, #Project Serve</time>
+        <p>
+          Winning acclaim for <a href="https://download-link-xuemi" class="underline hover:text-accent" target="_blank">Xuemi</a> earned me a seat on this learning journey. From Google to Apple and Fortinet, each stop unlocked fresh ideas about user-centric design.
+        </p>
       </div>
-      <div class="card">
-        <h3>Student Leader Summit Co‑organiser</h3>
-        <span class="date">2025</span>
-        <p>Gathered leaders from 10 schools to co‑design action plans on digital citizenship.</p>
-      </div>
-      <div class="card">
-        <h3>Opportunity X Scholar</h3>
-        <span class="date">2024</span>
-        <p>Analysed community‑health data and presented findings to 200+ peers globally.</p>
+      <div class="timeline-item">
+        <time class="font-semibold text-accent">2025 · San Francisco, Hack Club Summit</time>
+        <p>
+          Together with Ted Tan, I created <a href="https://download-link-spotify" class="underline hover:text-accent" target="_blank">Spotify Unwrapped</a>. Between code sprints, we toured LinkedIn HQ and met teenage developers from five continents.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ===== PROJECTS ===== -->
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
-    <div class="card-grid three-cols">
-      <div class="card">
-        <h3>Calorize</h3>
-        <span class="date">SwiftUI · 2024</span>
-        <p>Nutrition‑aware calorie tracker with ML food recognition.</p>
+  <!-- ACHIEVEMENTS -->
+  <section
+    id="achievements"
+    class="py-20 bg-accent/10 dark:bg-slate-800/50 px-6 max-w-4xl mx-auto"
+  >
+    <h3 class="text-3xl font-bold mb-12 text-center text-accent">Achievements</h3>
+    <ul class="achievement-animate list-disc list-inside space-y-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300 max-w-3xl mx-auto">
+      <li><strong>App of the Year (2024)</strong> — My iOS app <em>Xuemi</em> clinched 3<sup>rd</sup> runner-up at the SST Inc awards for boosting Mandarin vocab scores among 300 students.</li>
+      <li><strong>SST Character & Media Club Awards</strong> — Recognised for resilience, empathy, and leading our media squad through the school’s first hybrid livestream.</li>
+      <li><strong>EAGLES & Edusave Character Awards</strong> — Conferred by Singapore’s MOE for exemplary leadership, service, and citizenship beyond the classroom.</li>
+      <li><strong>Competition Highlights (2025)</strong> — PERSE Distinction + Best in School for an algorithmic route-planner; Opportunity X bronze for my research on marine Dinoflagellates.</li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 max-w-6xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-12 text-center text-accent">Projects</h3>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <a href="https://download-link-xuemi" target="_blank" class="block bg-white dark:bg-slate-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold mb-2 text-lg text-accent">Xuemi</h4>
+        <p>A SwiftUI flash-card app that personalises Mandarin revision.</p>
+      </a>
+      <a href="https://download-link-spotify" target="_blank" class="block bg-white dark:bg-slate-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold mb-2 text-lg text-accent">Spotify Unwrapped</h4>
+        <p>CLI tool that turns your listening data into shareable infographics.</p>
+      </a>
+      <a href="https://download-link-calorize" target="_blank" class="block bg-white dark:bg-slate-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold mb-2 text-lg text-accent">Calorize</h4>
+        <p>An ML-powered calorie tracker designed during the Swift Accelerator.</p>
+      </a>
+      <div class="block bg-white dark:bg-slate-800 p-6 rounded-lg shadow text-left">
+        <h4 class="font-semibold mb-2 text-lg text-accent">Research · Dinoflagellates</h4>
+        <p>Ranked 3<sup>rd</sup> at Opportunity X for unveiling plankton bloom triggers.</p>
       </div>
-      <div class="card">
-        <h3>Xuemi (学米)</h3>
-        <span class="date">SwiftUI · 2024</span>
-        <p>Mandarin vocab companion, 2<sup>nd</sup> runner‑up SST App Challenge.</p>
+      <div class="block bg-white dark:bg-slate-800 p-6 rounded-lg shadow text-left">
+        <h4 class="font-semibold mb-2 text-lg text-accent">Research · Brine Shrimp Eggs</h4>
+        <p>Investigated optimal salinity for sustainable aquaculture yields.</p>
       </div>
-      <div class="card">
-        <h3>Spotify Unwrapped</h3>
-        <span class="date">Python · 2025</span>
-        <p>CLI tool that turns your Spotify data into shareable year‑in‑music stories.</p>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section id="games" class="py-20 max-w-md mx-auto px-6 text-center">
+    <h3 class="text-3xl font-bold mb-8 text-accent">Games</h3>
+    <p class="mb-6 max-w-xl mx-auto text-slate-700 dark:text-slate-300">
+      Try out my Flappy Bird Q&A game! Dodge the pipes, answer questions correctly, and keep flying.
+    </p>
+    <a href="game-play.html" class="inline-block bg-accent text-white py-3 px-8 rounded-lg font-semibold hover:bg-blue-700 transition">
+      Play Game
+    </a>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 max-w-md mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-8 text-center text-accent">Get in Touch</h3>
+    <form action="https://formspree.io/f/yourFormID" method="POST" class="space-y-6">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name" />
       </div>
-      <div class="card">
-        <h3>Pygame Cultural Platformer</h3>
-        <span class="date">Python · 2025</span>
-        <p>Bilingual game featuring Chinese & Malay mini‑games.</p>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="your@email.com" />
       </div>
-      <div class="card">
-        <h3>Snap & Seek Scavenger Hunt</h3>
-        <span class="date">Leadership · 2023</span>
-        <p>Campus‑wide photo hunt that fostered community bonding.</p>
+      <div>
+        <label for="phone">Contact Number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+65 9123 4567" />
       </div>
-      <div class="card">
-        <h3>CyberSecure Teens (coming soon)</h3>
-        <span class="date">Non‑profit · 2026</span>
-        <p>App & resource hub to raise cybersecurity awareness among teens.</p>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
       </div>
-    </
+      <button type="submit" class="bg-accent text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Send Message
+      </button>
+    </form>
+  </section>
+
+  <footer class="text-center py-6 text-sm text-slate-600 dark:text-slate-400">
+    © <span id="year"></span> Kmy Er Sze Lei
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // Typed.js effect
+    new Typed('#typed', {
+      strings: ['Student Leader', 'SwiftUI Programmer', 'Cybersecurity Enthusiast', 'App Developer'],
+      typeSpeed: 60,
+      backSpeed: 40,
+      loop: true,
+      smartBackspace: true,
+    });
+
+    // Update footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

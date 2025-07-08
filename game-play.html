@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ dark:false }" x-bind:class="dark ? 'dark' : ''">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flappy Q&A Game | Kmy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{accent:'#2563eb'}}}}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous"/>
+</head>
+<body class="bg-sky-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors">
+  <header class="sticky top-0 z-50 bg-white/70 dark:bg-slate-800/70 backdrop-blur shadow flex items-center justify-between px-6 py-3">
+    <h1 class="font-bold text-xl text-accent">Kmy</h1>
+    <nav class="hidden md:flex gap-6 font-medium">
+      <a href="index.html" class="hover:text-accent">Home</a>
+      <a href="game-play.html" class="text-accent font-semibold">Game</a>
+    </nav>
+    <button @click="dark=!dark" class="text-xl" aria-label="Toggle Dark Mode"><i class="fas fa-circle-half-stroke"></i></button>
+  </header>
+
+  <!-- Instructions -->
+  <section id="instructionSection" class="max-w-xl mx-auto mt-12 p-6 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center mb-4 text-accent">How to Play</h2>
+    <p class="mb-4">Tap / Space to jump and dodge pipes. Crash ➔ answer 3 questions. Get 2 right to keep flying!</p>
+    <button id="startGameBtn" class="w-full py-3 bg-accent text-white rounded-lg font-semibold hover:brightness-110 transition">Play Now</button>
+  </section>
+
+  <!-- Countdown -->
+  <div id="countdown" class="fixed inset-0 hidden flex items-center justify-center text-accent text-9xl font-extrabold backdrop-blur bg-white/80 dark:bg-slate-900/80 select-none z-50">3</div>
+
+  <!-- Canvas -->
+  <canvas id="gameCanvas" width="400" height="600" class="mx-auto mt-10 rounded-lg border-4 border-accent shadow-lg hidden"></canvas>
+
+  <!-- Fail modal -->
+  <div id="failModal" class="fixed inset-0 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm z-50">
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl max-w-md w-full">
+      <p id="questionText" class="font-semibold mb-4"></p>
+      <form id="questionForm" class="mb-6"></form>
+      <div class="flex justify-end gap-4">
+        <button id="quitBtn" class="px-4 py-2 bg-gray-300 dark:bg-slate-600 rounded hover:bg-gray-400">Give Up</button>
+        <button id="submitAnswersBtn" class="px-4 py-2 bg-accent text-white rounded hover:brightness-110">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game over modal -->
+  <div id="gameOverModal" class="fixed inset-0 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm z-50">
+    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+      <h3 class="text-2xl font-bold mb-4 text-accent">Game Over</h3>
+      <p id="finalScore" class="mb-6">Your final score: 0</p>
+      <button id="restartBtn" class="w-full py-3 mb-3 bg-accent text-white rounded hover:brightness-110">Restart</button>
+      <button id="quitFailBtn" class="w-full py-3 bg-gray-300 dark:bg-slate-600 rounded hover:bg-gray-400">Quit to Menu</button>
+    </div>
+  </div>
+
+  <script src="game-play.js" defer></script>
+</body>
+</html>

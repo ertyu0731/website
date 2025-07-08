@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flappy Q&A - Instructions</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background: #e0f2fe;
+    font-family: Arial, sans-serif;
+    margin: 2rem auto;
+    max-width: 700px;
+    color: #2563eb;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+  button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 2rem auto 0;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #1d4ed8;
+  }
+</style>
+</head>
+<body>
+  <h1>Flappy Q&A - How to Play</h1>
+
+  <section>
+    <h2>Purpose of the Game</h2>
+    <p>This game helps you learn about coding, cybersecurity, and leadership in a fun and interactive way.</p>
+  </section>
+
+  <section>
+    <h2>How to Play</h2>
+    <ul>
+      <li>Click or press <strong>Space</strong> or <strong>Up Arrow</strong> to jump the bird.</li>
+      <li>Dodge obstacles (pipes) and keep flying.</li>
+      <li>If you hit an obstacle, you'll be asked a question.</li>
+      <li>Answer questions correctly to continue playing.</li>
+      <li>You can also choose to restart or answer a mini quiz to get a second chance.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Controls</h2>
+    <p>Jump by clicking or pressing Space / Up Arrow.</p>
+  </section>
+
+  <button id="playBtn">Play Now</button>
+
+  <script>
+    document.getElementById('playBtn').addEventListener('click', () => {
+      window.location.href = 'game-play.html';
+    });
+  </script>
+</body>
+</html>
